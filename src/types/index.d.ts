@@ -8,3 +8,13 @@ interface Prefecture {
 interface PrefectureWithSelection extends Prefecture {
   selected: boolean
 }
+
+interface PopulationAndYear {
+  value: number
+  year: number
+}
+
+interface PopulationTransitionsPerPref {
+  prefCode: number
+  data: PopulationAndYear[]
+}
