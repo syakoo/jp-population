@@ -10,6 +10,6 @@ describe('Header Component', () => {
   test('renders a title text.', () => {
     const { getByText } = render(<Header />)
 
-    expect(getByText('Population Transition Graph')).toBeInTheDocument()
+    expect(getByText('JP Population')).toBeInTheDocument()
   })
 })

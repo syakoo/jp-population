@@ -4,7 +4,7 @@ import React from 'react'
 //
 const Header: React.FC = () => (
   <header>
-    <div>Population Transition Graph</div>
+    <div>JP Population</div>
   </header>
 )
 
