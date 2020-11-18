@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { ToggledDetails } from '@src/components/molecules/ToggledDetails'
+import { CheckBox } from '@src/components/atoms/CheckBox'
 import { init, togglePref } from '@src/store/prefectures/prefecturesSlice'
 
 // ____________________
@@ -19,16 +20,12 @@ const PrefectureSelection: React.FC = () => {
   return (
     <ToggledDetails summary="設定">
       {prefectures.map(({ prefCode, prefName, selected }) => (
-        <span key={prefCode}>
-          <label>
-            <input
-              type="checkbox"
-              checked={selected}
-              onChange={() => dispatch(togglePref({ prefCode }))}
-            />
-            {prefName}
-          </label>
-        </span>
+        <CheckBox
+          key={prefCode}
+          label={prefName}
+          checked={selected}
+          onChange={() => dispatch(togglePref({ prefCode }))}
+        />
       ))}
     </ToggledDetails>
   )
