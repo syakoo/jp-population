@@ -18,3 +18,9 @@ interface PopulationTransitionsPerPref {
   prefCode: number
   data: PopulationAndYear[]
 }
+
+interface PopulationTransitionsPerPrefWithName {
+  prefCode: number
+  prefName: string
+  data: PopulationAndYear[]
+}
