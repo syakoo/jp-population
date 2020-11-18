@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ToggledDetails } from '@src/components/molecules/ToggledDetails'
 import { CheckBox } from '@src/components/atoms/CheckBox'
 import { init, togglePref } from '@src/store/prefectures/prefecturesSlice'
+import { fetchData } from '@src/store/populationTransitions/populationTransitionSlice'
 
 // ____________________
 //
@@ -24,7 +25,10 @@ const PrefectureSelection: React.FC = () => {
           key={prefCode}
           label={prefName}
           checked={selected}
-          onChange={() => dispatch(togglePref({ prefCode }))}
+          onChange={() => {
+            dispatch(togglePref({ prefCode }))
+            dispatch(fetchData({ prefCode }))
+          }}
         />
       ))}
     </ToggledDetails>

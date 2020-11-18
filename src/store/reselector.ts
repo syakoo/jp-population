@@ -14,8 +14,15 @@ export const selectedPopulationTransitionsSelector = createSelector(
   (prefectures, populationTransitions) => {
     return prefectures
       .filter((pref) => pref.selected)
-      .map((pref) => {
-        return populationTransitions.find((d) => d.prefCode === pref.prefCode)
-      })
+      .map(
+        (pref): PopulationTransitionsPerPrefWithName => {
+          return {
+            data: [],
+            prefCode: pref.prefCode,
+            prefName: pref.prefName,
+            ...populationTransitions.find((d) => d.prefCode === pref.prefCode),
+          }
+        }
+      )
   }
 )
