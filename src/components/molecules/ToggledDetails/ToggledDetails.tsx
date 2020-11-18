@@ -1,5 +1,11 @@
 import React, { useCallback, useState } from 'react'
 
+import {
+  _DisplayBody,
+  _ToggleButton,
+  _ToggledDisplayWrapper,
+} from './ToggledDetails.styles'
+
 // ____________________
 //
 interface ToggledDetailsProps {
@@ -19,13 +25,15 @@ const ToggledDetails: React.FC<ToggledDetailsProps> = ({
   }, [setIsDisplay])
 
   return (
-    <div>
-      <div data-testid="summary" onClick={toggleDisplayState}>
+    <_ToggledDisplayWrapper>
+      <_ToggleButton data-testid="summary" onClick={toggleDisplayState}>
         {summary}
-      </div>
-      {isDisplay && <div>{children}</div>}
-    </div>
+      </_ToggleButton>
+      {isDisplay && <_DisplayBody>{children}</_DisplayBody>}
+    </_ToggledDisplayWrapper>
   )
 }
 
+// ____________________
+//
 export default ToggledDetails
