@@ -15,8 +15,7 @@ interface PopulationAndYear {
 }
 
 interface PopulationTransitionsPerPref {
-  prefCode: number
-  data: PopulationAndYear[]
+  [prefCode: number]: PopulationAndYear[] | undefined
 }
 
 interface PopulationTransitionsPerPrefWithName {

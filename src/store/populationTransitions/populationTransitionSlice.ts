@@ -5,12 +5,12 @@ import { mockPopulationAndYears } from './mockData'
 // ____________________
 //
 interface PopulationTransitionsState {
-  populationTransitions: PopulationTransitionsPerPref[]
+  populationTransitions: PopulationTransitionsPerPref
   status: 'READY' | 'PENDING' | 'REGECTED'
 }
 
 const initialState: PopulationTransitionsState = {
-  populationTransitions: [],
+  populationTransitions: {},
   status: 'READY',
 }
 
@@ -24,14 +24,9 @@ const populationTransitionsSlice = createSlice({
       state,
       { payload: { prefCode } }: PayloadAction<{ prefCode: number }>
     ) => {
-      let pref = state.populationTransitions.find(
-        (pref) => pref.prefCode === prefCode
-      )
+      let pref = state.populationTransitions[prefCode]
       if (!pref) {
-        state.populationTransitions.push({
-          prefCode,
-          data: mockPopulationAndYears,
-        })
+        state.populationTransitions[prefCode] = mockPopulationAndYears
       }
     },
   },
