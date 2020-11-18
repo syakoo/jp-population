@@ -4,12 +4,6 @@ import { slideIn } from '@src/assets/keyframes'
 
 // ____________________
 //
-export const _ToggledDisplayWrapper = styled.div`
-  background-color: ${(p) => p.theme.white};
-  border-radius: 5px;
-  padding: 0.25rem;
-`
-
 export const _ToggleButton = styled.button`
   cursor: pointer;
   width: 100%;

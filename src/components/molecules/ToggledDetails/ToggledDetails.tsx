@@ -1,10 +1,7 @@
 import React, { useCallback, useState } from 'react'
 
-import {
-  _DisplayBody,
-  _ToggleButton,
-  _ToggledDisplayWrapper,
-} from './ToggledDetails.styles'
+import { _DisplayBody, _ToggleButton } from './ToggledDetails.styles'
+import { _Card } from '@src/components/atoms/Card'
 
 // ____________________
 //
@@ -25,12 +22,12 @@ const ToggledDetails: React.FC<ToggledDetailsProps> = ({
   }, [setIsDisplay])
 
   return (
-    <_ToggledDisplayWrapper>
+    <_Card>
       <_ToggleButton data-testid="summary" onClick={toggleDisplayState}>
         {summary}
       </_ToggleButton>
       {isDisplay && <_DisplayBody>{children}</_DisplayBody>}
-    </_ToggledDisplayWrapper>
+    </_Card>
   )
 }
 
