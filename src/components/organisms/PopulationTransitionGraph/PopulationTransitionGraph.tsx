@@ -2,12 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { _Card } from '@src/components/atoms/Card'
-import { selectedPopulationTransitionsSelector } from '@src/store/reselector'
+import { graphDataSelector } from './graphDataSelector'
 
 // ____________________
 //
 const PopulationTransitionGraph: React.FC = () => {
-  const graphData = useSelector(selectedPopulationTransitionsSelector)
+  const graphData = useSelector(graphDataSelector)
   console.log({ graphData })
 
   return (
