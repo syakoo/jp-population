@@ -7,9 +7,5 @@ import PopulationTransitionGraph from './PopulationTransitionGraph'
 // ____________________
 //
 describe('<PopulationTransitionGraph>', () => {
-  test('It should render a title text.', () => {
-    const { getByText } = render(<PopulationTransitionGraph />)
-
-    // expect(getByText('JP Population')).toBeInTheDocument()
-  })
+  test.todo('It should be rendered without error.')
 })
