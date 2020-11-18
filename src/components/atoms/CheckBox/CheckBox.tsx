@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React from 'react'
 
 // ____________________
@@ -12,8 +13,8 @@ interface CheckBoxProps {
 //
 const CheckBox: React.FC<CheckBoxProps> = ({ checked, onChange, label }) => {
   return (
-    <div>
-      <label>
+    <>
+      <_Label>
         <input
           type="checkbox"
           aria-label="input-checkbox"
@@ -21,11 +22,16 @@ const CheckBox: React.FC<CheckBoxProps> = ({ checked, onChange, label }) => {
           onChange={onChange}
         />
         {label}
-      </label>
-    </div>
+      </_Label>
+    </>
   )
 }
 
 // ____________________
 //
+const _Label = styled.label`
+  margin: 0px 0.2em;
+  display: inline-block;
+`
+
 export default CheckBox
