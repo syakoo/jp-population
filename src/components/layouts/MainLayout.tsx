@@ -1,4 +1,4 @@
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import React from 'react'
 
 import { theme, GlobalStyle } from './style'
@@ -12,7 +12,7 @@ const Main: React.FC = ({ children }) => (
       <>
         <GlobalStyle {...theme} />
         <Header />
-        <main>{children}</main>
+        <_Main>{children}</_Main>
       </>
     </ThemeProvider>
   </>
@@ -20,4 +20,9 @@ const Main: React.FC = ({ children }) => (
 
 // ____________________
 //
+const _Main = styled.main`
+  max-width: 800px;
+  margin: auto;
+`
+
 export default Main
