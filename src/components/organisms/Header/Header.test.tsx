@@ -6,8 +6,8 @@ import Header from './Header'
 
 // ____________________
 //
-describe('Header Component', () => {
-  test('renders a title text.', () => {
+describe('<Header>', () => {
+  test('It should render a title text.', () => {
     const { getByText } = render(<Header />)
 
     expect(getByText('JP Population')).toBeInTheDocument()

@@ -6,8 +6,8 @@ import PopulationTransitionGraph from './PopulationTransitionGraph'
 
 // ____________________
 //
-describe('Header Component', () => {
-  test('renders a title text.', () => {
+describe('<PopulationTransitionGraph>', () => {
+  test('It should render a title text.', () => {
     const { getByText } = render(<PopulationTransitionGraph />)
 
     // expect(getByText('JP Population')).toBeInTheDocument()

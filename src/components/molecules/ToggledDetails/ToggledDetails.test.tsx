@@ -6,8 +6,8 @@ import ToggledDetails from './ToggledDetails'
 
 // ____________________
 //
-describe('Header Component', () => {
-  test('renders the summary and test-id.', () => {
+describe('<ToggledDetails>', () => {
+  test('It should render the summary and test-id.', () => {
     const { getByText, getByTestId } = render(
       <ToggledDetails summary="TITLE" />
     )
@@ -16,7 +16,7 @@ describe('Header Component', () => {
     expect(getByTestId('summary')).toBeInTheDocument()
   })
 
-  test('works toggle behavior.', () => {
+  test('It should work toggle behavior.', () => {
     const { queryByText, getByTestId } = render(
       <ToggledDetails summary="TITLE">
         <div>HOGE</div>

@@ -17,12 +17,12 @@ jest.mock('react-redux', () => ({
 
 // ____________________
 //
-describe('Prefecture Component', () => {
+describe('<PrefectureSelection>', () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
 
-  test('renders a title text.', () => {
+  test('It should render a title text.', () => {
     const { getByText } = render(<PrefectrueSelection />)
 
     expect(getByText('設定')).toBeInTheDocument()

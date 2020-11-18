@@ -6,8 +6,8 @@ import CheckBox from './CheckBox'
 
 // ____________________
 //
-describe('Header Component', () => {
-  test('renders the label.', () => {
+describe('<CheckBox>', () => {
+  test('It should render the label.', () => {
     const { getByLabelText, getByText } = render(
       <CheckBox label="TITLE" checked={false} onChange={() => {}} />
     )
@@ -16,7 +16,7 @@ describe('Header Component', () => {
     expect(getByLabelText('input-checkbox')).toBeInTheDocument()
   })
 
-  test('works change event.', () => {
+  test('It should work change event.', () => {
     const mockFunc = jest.fn()
     const { getByLabelText } = render(
       <CheckBox label="TITLE" checked={false} onChange={mockFunc} />

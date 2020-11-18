@@ -6,8 +6,8 @@ import { _Card } from './Card'
 
 // ____________________
 //
-describe('Header Component', () => {
-  test('renders a text.', () => {
+describe('<Card>', () => {
+  test('It should render the children.', () => {
     const { getByText } = render(<_Card>Sample Text</_Card>)
 
     expect(getByText('Sample Text')).toBeInTheDocument()
