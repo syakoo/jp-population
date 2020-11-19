@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 
-import { _DisplayBody, _ToggleButton } from './ToggledDetails.styles'
+import { _DisplayBody, _ToggleButton, _Triangle } from './ToggledDetails.styles'
 import { _Card } from '@src/components/atoms/Card'
 
 // ____________________
@@ -24,6 +24,7 @@ const ToggledDetails: React.FC<ToggledDetailsProps> = ({
   return (
     <_Card>
       <_ToggleButton data-testid="summary" onClick={toggleDisplayState}>
+        <_Triangle isDisplay={isDisplay} />
         {summary}
       </_ToggleButton>
       {isDisplay && <_DisplayBody>{children}</_DisplayBody>}
@@ -33,4 +34,5 @@ const ToggledDetails: React.FC<ToggledDetailsProps> = ({
 
 // ____________________
 //
+
 export default ToggledDetails
