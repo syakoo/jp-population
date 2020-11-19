@@ -13,7 +13,7 @@ export const graphDataSelector = createSelector(
   (prefectures, populationTransitions) => {
     const selectedPrefectures = prefectures.filter((pref) => pref.selected)
 
-    let graphDataValueParYear: {
+    let graphDataValuePerYearDict: {
       [year: number]: { [prefCode: number]: number }
     } = {}
     for (const { prefCode } of selectedPrefectures) {
@@ -21,20 +21,30 @@ export const graphDataSelector = createSelector(
       if (!data) continue
 
       for (const { year, value } of data) {
-        graphDataValueParYear = {
-          ...graphDataValueParYear,
-          [year]: { ...graphDataValueParYear[year], [prefCode]: value },
+        graphDataValuePerYearDict = {
+          ...graphDataValuePerYearDict,
+          [year]: { ...graphDataValuePerYearDict[year], [prefCode]: value },
         }
       }
     }
-    const prefNames = selectedPrefectures.reduce(
-      (prev, curr) => ({
-        ...prev,
-        [curr.prefCode]: curr.prefName,
-      }),
-      {} as { [prefCode: number]: string }
-    )
+    // const prefNames = selectedPrefectures.reduce(
+    //   (prev, curr) => ({
+    //     ...prev,
+    //     [curr.prefCode]: curr.prefName,
+    //   }),
+    //   {} as { [prefCode: number]: string }
+    // )
+    let graphDataValuePerYear: {
+      [prefCode: number]: number
+      year: number
+    }[] = []
+    for (const yearStr in graphDataValuePerYearDict) {
+      graphDataValuePerYear.push({
+        ...graphDataValuePerYearDict[yearStr],
+        year: +yearStr,
+      })
+    }
 
-    return { graphDataValueParYear, prefNames }
+    return { graphDataValuePerYear, selectedPrefectures }
   }
 )
