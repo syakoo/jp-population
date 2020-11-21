@@ -7,7 +7,7 @@ import MainLayout from './MainLayout'
 // ____________________
 //
 describe('<MainLayout>', () => {
-  test('It should render the children.', () => {
+  it('should render the children.', () => {
     const { getByText } = render(
       <MainLayout>
         <h1>Hello, World.</h1>

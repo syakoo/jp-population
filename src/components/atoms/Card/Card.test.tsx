@@ -7,7 +7,7 @@ import { _Card } from './Card'
 // ____________________
 //
 describe('<Card>', () => {
-  test('It should render the children.', () => {
+  it('should render the children.', () => {
     const { getByText } = render(<_Card>Sample Text</_Card>)
 
     expect(getByText('Sample Text')).toBeInTheDocument()

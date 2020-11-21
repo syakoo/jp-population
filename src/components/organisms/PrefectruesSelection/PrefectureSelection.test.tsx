@@ -22,7 +22,7 @@ describe('<PrefectureSelection>', () => {
     jest.restoreAllMocks()
   })
 
-  test('It should render a title text.', () => {
+  it('should render a title text.', () => {
     const { getByText } = render(<PrefectrueSelection />)
 
     expect(getByText('設定')).toBeInTheDocument()

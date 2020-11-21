@@ -7,7 +7,7 @@ import CheckBox from './CheckBox'
 // ____________________
 //
 describe('<CheckBox>', () => {
-  test('It should render the label.', () => {
+  it('should render the label.', () => {
     const { getByLabelText, getByText } = render(
       <CheckBox label="TITLE" checked={false} onChange={() => {}} />
     )
@@ -16,7 +16,7 @@ describe('<CheckBox>', () => {
     expect(getByLabelText('input-checkbox')).toBeInTheDocument()
   })
 
-  test('It should work change event.', () => {
+  it('should work change event.', () => {
     const mockFunc = jest.fn()
     const { getByLabelText } = render(
       <CheckBox label="TITLE" checked={false} onChange={mockFunc} />
