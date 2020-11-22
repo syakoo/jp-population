@@ -4,14 +4,17 @@ import { mockPopulationAndYears } from './mockData'
 
 // ____________________
 //
+type LoadingStatus = 'IDLE' | 'PENDING'
+
 interface PopulationTransitionsState {
   populationTransitions: PopulationTransitionsPerPref
-  status: 'READY' | 'PENDING' | 'REGECTED'
+  loadingStatus: LoadingStatus
+  errorMsg?: string
 }
 
 const initialState: PopulationTransitionsState = {
   populationTransitions: {},
-  status: 'READY',
+  loadingStatus: 'IDLE',
 }
 
 // ____________________
@@ -29,8 +32,14 @@ const populationTransitionsSlice = createSlice({
         state.populationTransitions[prefCode] = mockPopulationAndYears
       }
     },
+    changeStatus: (
+      state,
+      { payload: { status } }: PayloadAction<{ status: LoadingStatus }>
+    ) => {
+      state.loadingStatus = status
+    },
   },
 })
 
-export const { fetchData } = populationTransitionsSlice.actions
+export const { fetchData, changeStatus } = populationTransitionsSlice.actions
 export default populationTransitionsSlice.reducer
