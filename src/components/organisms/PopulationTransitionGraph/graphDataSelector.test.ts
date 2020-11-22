@@ -39,7 +39,7 @@ const testCase: RootState = {
         { value: 301, year: 1001 },
       ],
     },
-    status: 'READY',
+    loadingStatus: 'IDLE',
   },
 }
 

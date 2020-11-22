@@ -5,7 +5,7 @@ import { ToggledDetails } from '@src/components/molecules/ToggledDetails'
 import { CheckBox } from '@src/components/atoms/CheckBox'
 import { togglePref } from '@src/store/prefectures/prefecturesSlice'
 import { fetchPrefectures } from '@src/store/prefectures/prefecturesThunk'
-import { fetchData } from '@src/store/populationTransitions/populationTransitionSlice'
+import { fetchPopulationTransition } from '@src/store/populationTransitions/populationTransitionThunk'
 
 // ____________________
 //
@@ -28,7 +28,7 @@ const PrefectureSelection: React.FC = () => {
           checked={selected}
           onChange={() => {
             dispatch(togglePref({ prefCode }))
-            dispatch(fetchData({ prefCode }))
+            dispatch(fetchPopulationTransition({ prefCode }))
           }}
         />
       ))}

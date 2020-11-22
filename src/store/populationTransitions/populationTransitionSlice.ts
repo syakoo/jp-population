@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { mockPopulationAndYears } from './mockData'
+import { fetchPopulationTransition } from './populationTransitionThunk'
 
 // ____________________
 //
@@ -32,14 +33,41 @@ const populationTransitionsSlice = createSlice({
         state.populationTransitions[prefCode] = mockPopulationAndYears
       }
     },
-    changeStatus: (
+    populationChangeStatus: (
       state,
       { payload: { status } }: PayloadAction<{ status: LoadingStatus }>
     ) => {
       state.loadingStatus = status
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPopulationTransition.pending, (state) => {
+      state.loadingStatus = 'PENDING'
+    }),
+      builder.addCase(
+        fetchPopulationTransition.fulfilled,
+        (state, { payload }) => {
+          state.loadingStatus = 'IDLE'
+          if (payload) {
+            state.populationTransitions[payload.prefCode] =
+              payload.populationTransitions
+          }
+        }
+      ),
+      builder.addCase(
+        fetchPopulationTransition.rejected,
+        (state, { payload }) => {
+          state.loadingStatus = 'IDLE'
+          if (payload) {
+            state.errorMsg = payload
+          }
+        }
+      )
+  },
 })
 
-export const { fetchData, changeStatus } = populationTransitionsSlice.actions
+export const {
+  fetchData,
+  populationChangeStatus,
+} = populationTransitionsSlice.actions
 export default populationTransitionsSlice.reducer
