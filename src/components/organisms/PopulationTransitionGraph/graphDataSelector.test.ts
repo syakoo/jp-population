@@ -22,7 +22,7 @@ const testCase: RootState = {
         selected: false,
       },
     ],
-    status: 'READY',
+    loadingStatus: 'IDLE',
   },
   populationTransitions: {
     populationTransitions: {
