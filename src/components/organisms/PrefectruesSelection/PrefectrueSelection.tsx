@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { ToggledDetails } from '@src/components/molecules/ToggledDetails'
 import { CheckBox } from '@src/components/atoms/CheckBox'
-import { init, togglePref } from '@src/store/prefectures/prefecturesSlice'
+import { togglePref } from '@src/store/prefectures/prefecturesSlice'
+import { fetchPrefectures } from '@src/store/prefectures/prefecturesThunk'
 import { fetchData } from '@src/store/populationTransitions/populationTransitionSlice'
 
 // ____________________
@@ -14,7 +15,7 @@ const PrefectureSelection: React.FC = () => {
 
   useEffect(() => {
     if (prefectures.length === 0) {
-      dispatch(init())
+      dispatch(fetchPrefectures())
     }
   }, [])
 
