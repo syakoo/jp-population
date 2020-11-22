@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { mockPrefectures } from './mockData'
+import { fetchPrefectures } from './prefecturesThunk'
 
 // ____________________
 //
+type LoadingStatus = 'IDLE' | 'PENDING'
+
 interface PrefecturesState {
   prefectures: PrefectureWithSelection[]
-  status: 'READY' | 'PENDING' | 'REGECTED'
+  loadingStatus: LoadingStatus
+  errorMsg?: string
 }
 
 const initialState: PrefecturesState = {
   prefectures: [],
-  status: 'READY',
+  loadingStatus: 'IDLE',
 }
 
 // ____________________
@@ -21,7 +25,7 @@ const prefecturesSlice = createSlice({
   initialState: initialState,
   reducers: {
     init: (state) => {
-      if (state.status !== 'READY') return
+      if (state.loadingStatus !== 'IDLE') return
 
       const prefectures = mockPrefectures
       const prefectureWithSelection = prefectures.map(
@@ -39,8 +43,31 @@ const prefecturesSlice = createSlice({
         pref.selected = !pref.selected
       }
     },
+    changeStatus: (
+      state,
+      { payload: { status } }: PayloadAction<{ status: LoadingStatus }>
+    ) => {
+      state.loadingStatus = status
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPrefectures.fulfilled, (state, { payload }) => {
+      state.loadingStatus = 'IDLE'
+      if (payload) {
+        const prefectureWithSelection = payload.map(
+          (pref): PrefectureWithSelection => ({ ...pref, selected: false })
+        )
+        state.prefectures = prefectureWithSelection
+      }
+    }),
+      builder.addCase(fetchPrefectures.rejected, (state, { payload }) => {
+        state.loadingStatus = 'IDLE'
+        if (payload) {
+          state.errorMsg = payload
+        }
+      })
   },
 })
 
-export const { init, togglePref } = prefecturesSlice.actions
+export const { init, togglePref, changeStatus } = prefecturesSlice.actions
 export default prefecturesSlice.reducer
