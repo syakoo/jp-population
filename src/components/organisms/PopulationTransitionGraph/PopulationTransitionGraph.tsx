@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import {
   LineChart,
@@ -16,8 +16,19 @@ import { graphDataSelector } from './graphDataSelector'
 
 // ____________________
 //
+const getRandomColors = (num: number) => {
+  const result: string[] = []
+  for (let i = 0; i < num; i++) {
+    result.push(`hsl(${360 * Math.random()}, 51%, 33%)`)
+  }
+  return result
+}
+
+// ____________________
+//
 const PopulationTransitionGraph: React.FC = () => {
   const graphData = useSelector(graphDataSelector)
+  const colors = useMemo(() => getRandomColors(47), [])
 
   return (
     <_Card>
@@ -45,12 +56,13 @@ const PopulationTransitionGraph: React.FC = () => {
           />
           <Tooltip />
           <Legend />
-          {graphData.selectedPrefectures.map((d) => (
+          {graphData.selectedPrefectures.map((d, i) => (
             <Line
               key={d.prefCode}
               type="monotone"
               dataKey={d.prefCode}
               name={d.prefName}
+              stroke={colors[i]}
             />
           ))}
         </LineChart>
