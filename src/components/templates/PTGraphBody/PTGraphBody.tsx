@@ -21,4 +21,4 @@ const _MainWrapper = styled.div`
   margin: 2em 0px;
 `
 
-export default PTGraphBody
+export default React.memo(PTGraphBody)

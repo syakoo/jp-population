@@ -34,4 +34,4 @@ const _Label = styled.label`
   display: inline-block;
 `
 
-export default CheckBox
+export default React.memo(CheckBox)

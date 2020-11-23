@@ -90,4 +90,4 @@ const _WrappedCard = styled(_Card)`
 // ____________________
 //
 
-export default PopulationTransitionGraph
+export default React.memo(PopulationTransitionGraph)

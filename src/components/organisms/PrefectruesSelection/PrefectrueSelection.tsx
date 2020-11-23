@@ -42,4 +42,4 @@ const PrefectureSelection: React.FC = () => {
 
 // ____________________
 //
-export default PrefectureSelection
+export default React.memo(PrefectureSelection)
