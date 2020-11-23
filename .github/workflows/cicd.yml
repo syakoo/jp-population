@@ -30,7 +30,7 @@ jobs:
       - name: add .env
         run: |
           echo "API_KEY=${{ secrets.API_KEY }}" > ./.env
-          echo "API_KEY=${{ secrets.API_ROOT }}" > ./.env
+          echo "API_ROOT=${{ secrets.API_ROOT }}" > ./.env
       - name: build
         run: |
           npm run build
