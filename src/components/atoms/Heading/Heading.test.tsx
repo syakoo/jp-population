@@ -2,13 +2,13 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import Header from './Header'
+import { _H1 } from './Heading'
 
 // ____________________
 //
-describe('<Header>', () => {
-  it('should render a title text.', () => {
-    const { getByText } = render(<Header />)
+describe('<_H1>', () => {
+  it('should render the children.', () => {
+    const { getByText } = render(<_H1>JP Population</_H1>)
 
     expect(getByText('JP Population')).toBeInTheDocument()
   })

@@ -6,8 +6,8 @@ import MainLayout from './MainLayout'
 
 // ____________________
 //
-describe('Main Component', () => {
-  test('renders a text of a child component.', () => {
+describe('<MainLayout>', () => {
+  it('should render the children.', () => {
     const { getByText } = render(
       <MainLayout>
         <h1>Hello, World.</h1>
