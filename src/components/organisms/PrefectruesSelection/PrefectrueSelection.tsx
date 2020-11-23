@@ -6,11 +6,14 @@ import { CheckBox } from '@src/components/atoms/CheckBox'
 import { togglePref } from '@src/store/prefectures/prefecturesSlice'
 import { fetchPrefectures } from '@src/store/prefectures/prefecturesThunk'
 import { fetchPopulationTransition } from '@src/store/populationTransitions/populationTransitionThunk'
+import { LoadingSkeletons } from './LoadingSkeletons'
 
 // ____________________
 //
 const PrefectureSelection: React.FC = () => {
-  const { prefectures } = useSelector((state) => state.prefectures)
+  const { prefectures, loadingStatus } = useSelector(
+    (state) => state.prefectures
+  )
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,6 +35,7 @@ const PrefectureSelection: React.FC = () => {
           }}
         />
       ))}
+      {loadingStatus !== 'IDLE' && <LoadingSkeletons num={10} />}
     </ToggledDetails>
   )
 }
