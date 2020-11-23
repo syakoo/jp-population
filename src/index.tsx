@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import { MainLayout } from './components/layouts'
+import { ErrorBoundary } from './components/templates/ErrorBoundary'
 import { PTGraphBody } from './components/templates/PTGraphBody'
 import { store } from './store'
 
@@ -12,7 +13,9 @@ const Index: React.FC = () => {
   return (
     <Provider store={store}>
       <MainLayout>
-        <PTGraphBody />
+        <ErrorBoundary>
+          <PTGraphBody />
+        </ErrorBoundary>
       </MainLayout>
     </Provider>
   )
