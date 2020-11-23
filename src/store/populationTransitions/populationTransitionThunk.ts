@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import type { RootState } from '@src/store/types'
-import { populationChangeStatus } from './populationTransitionSlice'
 
 // ____________________
 //
@@ -33,7 +32,7 @@ export const fetchPopulationTransition = createAsyncThunk<
   { prefCode: number },
   {
     state: RootState
-    rejectValue: string
+    rejectValue: { msg: string; prefCode: number }
   }
 >(
   'populationTransitions/fetch',
@@ -46,7 +45,7 @@ export const fetchPopulationTransition = createAsyncThunk<
     ).then((resp) => resp.json())
 
     if (respData.message !== null) {
-      return rejectWithValue(respData.message)
+      return rejectWithValue({ msg: respData.message, prefCode })
     }
     const totalPopulationsData = respData.result.data.find(
       (d) => d.label === '総人口'
@@ -62,9 +61,9 @@ export const fetchPopulationTransition = createAsyncThunk<
   {
     condition: ({ prefCode }, { getState }) => {
       const {
-        populationTransitions: { loadingStatus, populationTransitions },
+        populationTransitions: { populationTransitions },
       } = getState()
-      if (loadingStatus !== 'IDLE' || prefCode in populationTransitions) {
+      if (prefCode in populationTransitions) {
         return false
       }
     },

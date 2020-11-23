@@ -11,11 +11,13 @@ interface PopulationTransitionsState {
   populationTransitions: PopulationTransitionsPerPref
   loadingStatus: LoadingStatus
   errorMsg?: string
+  loadingPrefCodes: number[]
 }
 
 const initialState: PopulationTransitionsState = {
   populationTransitions: {},
   loadingStatus: 'IDLE',
+  loadingPrefCodes: [],
 }
 
 // ____________________
@@ -41,13 +43,20 @@ const populationTransitionsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchPopulationTransition.pending, (state) => {
+    builder.addCase(fetchPopulationTransition.pending, (state, action) => {
       state.loadingStatus = 'PENDING'
+      state.loadingPrefCodes.push(action.meta.arg.prefCode)
     }),
       builder.addCase(
         fetchPopulationTransition.fulfilled,
         (state, { payload }) => {
-          state.loadingStatus = 'IDLE'
+          // NOTE: O(n) なので懸念点
+          state.loadingPrefCodes = state.loadingPrefCodes.filter(
+            (prefCodes) => prefCodes !== payload?.prefCode
+          )
+          if (state.loadingPrefCodes.length === 0) {
+            state.loadingStatus = 'IDLE'
+          }
           if (payload) {
             state.populationTransitions[payload.prefCode] =
               payload.populationTransitions
@@ -57,9 +66,15 @@ const populationTransitionsSlice = createSlice({
       builder.addCase(
         fetchPopulationTransition.rejected,
         (state, { payload }) => {
-          state.loadingStatus = 'IDLE'
+          // NOTE: O(n) なので懸念点
+          state.loadingPrefCodes = state.loadingPrefCodes.filter(
+            (prefCodes) => prefCodes !== payload?.prefCode
+          )
+          if (state.loadingPrefCodes.length === 0) {
+            state.loadingStatus = 'IDLE'
+          }
           if (payload) {
-            state.errorMsg = payload
+            state.errorMsg = payload.msg
           }
         }
       )

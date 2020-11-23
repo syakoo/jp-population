@@ -40,6 +40,7 @@ const testCase: RootState = {
       ],
     },
     loadingStatus: 'IDLE',
+    loadingPrefCodes: [],
   },
 }
 
