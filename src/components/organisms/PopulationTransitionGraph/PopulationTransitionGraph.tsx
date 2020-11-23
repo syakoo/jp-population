@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -13,6 +14,8 @@ import {
 
 import { _Card } from '@src/components/atoms/Card'
 import { graphDataSelector } from './graphDataSelector'
+import NoSelectedView from './SubViews/NoSelectedView'
+import LoadingView from './SubViews/LoadingView'
 
 // ____________________
 //
@@ -28,10 +31,13 @@ const getRandomColors = (num: number) => {
 //
 const PopulationTransitionGraph: React.FC = () => {
   const graphData = useSelector(graphDataSelector)
+  const loadingStatus = useSelector(
+    (state) => state.populationTransitions.loadingStatus
+  )
   const colors = useMemo(() => getRandomColors(47), [])
 
   return (
-    <_Card>
+    <_WrappedCard>
       <ResponsiveContainer width="100%" minHeight={400}>
         <LineChart
           margin={{ top: 40, right: 20, left: 0, bottom: 10 }}
@@ -67,9 +73,19 @@ const PopulationTransitionGraph: React.FC = () => {
           ))}
         </LineChart>
       </ResponsiveContainer>
-    </_Card>
+      {graphData.selectedPrefectures.length !== 0 &&
+        loadingStatus === 'PENDING' && <LoadingView />}
+      {graphData.selectedPrefectures.length === 0 && <NoSelectedView />}
+    </_WrappedCard>
   )
 }
+
+// ____________________
+//
+const _WrappedCard = styled(_Card)`
+  position: relative;
+  overflow: hidden;
+`
 
 // ____________________
 //
