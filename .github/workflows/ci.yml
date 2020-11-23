@@ -1,7 +1,7 @@
-name: Test and Release GitHub Page
+name: CI
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
@@ -27,14 +27,3 @@ jobs:
       - name: test
         run: |
           npm run test
-      - name: build
-        run: |
-          npm run build
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          API_ROOT: ${{ secrets.API_ROOT }}
-      - name: deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./dist
