@@ -27,12 +27,13 @@ jobs:
       - name: test
         run: |
           npm run test
+      - name: add .env
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" > ./.env
+          echo "API_KEY=${{ secrets.API_ROOT }}" > ./.env
       - name: build
         run: |
           npm run build
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-          API_ROOT: ${{ secrets.API_ROOT }}
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
