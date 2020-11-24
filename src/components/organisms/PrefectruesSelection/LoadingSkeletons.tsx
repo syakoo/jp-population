@@ -34,7 +34,7 @@ export const LoadingSkeletons: React.FC<LoadingSkeletonsProps> = React.memo(
 //
 const _LoadingSkeleton = styled.span`
   display: inline-block;
-  margin: 0.2rem;
+  margin: 0px 0.2rem;
 
   span {
     display: inline-block;
