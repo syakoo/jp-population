@@ -1,43 +1,32 @@
 // ____________________
 //
-interface PrefectruesRespError {
+interface RESASResponseError {
   statusCode: string
   message: string
   description: string
 }
-
-interface PrefecturesRespSuccess {
+interface RESASResponseSuccess<T> {
   message: null
-  result: Prefecture[]
+  result: T
 }
 
-type PrefectureResp = PrefecturesRespSuccess | PrefectruesRespError
-
-interface PopulationTransitionRespError {
-  statusCode: string
-  message: string
-  description: string
+interface PopulationTransitionRespData {
+  boundaryYear: number
+  data: {
+    label: string
+    data: PopulationAndYear[]
+  }[]
 }
 
-interface PopulationTransitionRespSuccess {
-  message: null
-  result: {
-    boundaryYear: number
-    data: {
-      label: string
-      data: PopulationAndYear[]
-    }[]
-  }
-}
-
+type PrefecturesResp = RESASResponseSuccess<Prefecture[]> | RESASResponseError
 type PopulationTransitionResp =
-  | PopulationTransitionRespSuccess
-  | PopulationTransitionRespError
+  | RESASResponseSuccess<PopulationTransitionRespData>
+  | RESASResponseError
 
 // ____________________
 //
 export const fetchPrefecturesFromRESAS = async () => {
-  const respData: PrefectureResp = await fetch(
+  const respData: PrefecturesResp = await fetch(
     `${process.env.API_ROOT}/prefectures`,
     {
       headers: { 'x-api-key': process.env.API_KEY || '' },
