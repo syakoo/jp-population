@@ -7,15 +7,17 @@ import { _Card } from '@src/components/atoms/Card'
 //
 interface ToggledDetailsProps {
   summary: string
+  initialState?: boolean
 }
 
 // ____________________
 //
 const ToggledDetails: React.FC<ToggledDetailsProps> = ({
   summary,
+  initialState = false,
   children,
 }) => {
-  const [isDisplay, setIsDisplay] = useState(false)
+  const [isDisplay, setIsDisplay] = useState(initialState)
 
   const toggleDisplayState = useCallback(() => {
     setIsDisplay((isDisplay) => !isDisplay)

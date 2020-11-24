@@ -23,7 +23,7 @@ const PrefectureSelection: React.FC = () => {
   }, [])
 
   return (
-    <ToggledDetails summary="設定">
+    <ToggledDetails summary="設定" initialState={true}>
       {prefectures.map(({ prefCode, prefName, selected }) => (
         <CheckBox
           key={prefCode}
@@ -35,7 +35,7 @@ const PrefectureSelection: React.FC = () => {
           }}
         />
       ))}
-      {loadingStatus !== 'IDLE' && <LoadingSkeletons num={10} />}
+      {loadingStatus !== 'IDLE' && <LoadingSkeletons num={47} />}
     </ToggledDetails>
   )
 }

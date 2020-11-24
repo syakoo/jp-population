@@ -1,29 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import type { RootState } from '@src/store/types'
-
-// ____________________
-//
-interface PopulationTransitionRespError {
-  statusCode: string
-  message: string
-  description: string
-}
-
-interface PopulationTransitionRespSuccess {
-  message: null
-  result: {
-    boundaryYear: number
-    data: {
-      label: string
-      data: PopulationAndYear[]
-    }[]
-  }
-}
-
-type PopulationTransitionResp =
-  | PopulationTransitionRespSuccess
-  | PopulationTransitionRespError
+import { fetchPopulationTransitionFromRESAS } from '@src/endpoints/resas'
 
 // ____________________
 //
@@ -37,12 +15,7 @@ export const fetchPopulationTransition = createAsyncThunk<
 >(
   'populationTransitions/fetch',
   async ({ prefCode }, { rejectWithValue }) => {
-    const respData: PopulationTransitionResp = await fetch(
-      `${process.env.API_ROOT}/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
-      {
-        headers: { 'x-api-key': process.env.API_KEY || '' },
-      }
-    ).then((resp) => resp.json())
+    const respData = await fetchPopulationTransitionFromRESAS(prefCode)
 
     if (respData.message !== null) {
       return rejectWithValue({ msg: respData.message, prefCode })
