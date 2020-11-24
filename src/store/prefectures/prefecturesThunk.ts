@@ -1,22 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import type { RootState } from '@src/store/types'
+import { fetchPrefecturesFromRESAS } from '@src/endpoints/resas'
 import { changeStatus } from './prefecturesSlice'
-
-// ____________________
-//
-interface PrefectruesRespError {
-  statusCode: string
-  message: string
-  description: string
-}
-
-interface PrefecturesRespSuccess {
-  message: null
-  result: Prefecture[]
-}
-
-type PrefectureResp = PrefecturesRespSuccess | PrefectruesRespError
 
 // ____________________
 //
@@ -36,12 +22,7 @@ export const fetchPrefectures = createAsyncThunk<
     if (loadingStatus !== 'IDLE') return
 
     dispatch(changeStatus({ status: 'PENDING' }))
-    const respData: PrefectureResp = await fetch(
-      `${process.env.API_ROOT}/prefectures`,
-      {
-        headers: { 'x-api-key': process.env.API_KEY || '' },
-      }
-    ).then((resp) => resp.json())
+    const respData = await fetchPrefecturesFromRESAS()
 
     if (respData.message !== null) {
       return rejectWithValue(respData.message)
